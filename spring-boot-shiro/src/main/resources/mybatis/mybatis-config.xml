@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <!-- 配置信息 -->
+<configuration>
+	<properties resource="jdbc.properties"></properties>
+	<!-- <settings>
+        <setting name="callSettersOnNulls" value="true"/>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings> -->
+    <!-- 别名默认就是类名 -->
+	<!-- <typeAliases>
+		<package name="spring.boot.pojo"/>
+	</typeAliases> -->
+ <!-- 配置运行环境的信息 -->
+	<environments default="test">
+		<environment id="test">
+			<!-- 事务管理 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<!-- 连接池管理 connection-->
+			<dataSource type="POOLED">
+				 <property name="driver" value="${jdbc.driver}"/>
+		        <property name="url" value="${jdbc.url}"/>
+		        <property name="username" value="${jdbc.user}"/>
+		        <property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+
+	</environments>
+	
+	<mappers>
+	<!-- 建立和mapper.xml的关系 -->
+		<package name="spring.boot.mapper"/>
+	</mappers>
+	
+</configuration>

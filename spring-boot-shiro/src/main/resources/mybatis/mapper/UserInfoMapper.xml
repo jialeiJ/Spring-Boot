@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.boot.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="spring.boot.pojo.UserInfo">
+    <result column="UID" jdbcType="VARCHAR" property="uid" />
+    <result column="XM" jdbcType="VARCHAR" property="xm" />
+    <result column="ZH" jdbcType="VARCHAR" property="zh" />
+    <result column="YHM" jdbcType="VARCHAR" property="yhm" />
+    <result column="MM" jdbcType="VARCHAR" property="mm" />
+    <result column="YZ" jdbcType="VARCHAR" property="yz" />
+    <result column="ZT" jdbcType="VARCHAR" property="zt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UID, XM, ZH, YHM, MM, YZ, ZT
+  </sql>
+  <select id="selectByExample" parameterType="spring.boot.pojo.UserInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="spring.boot.pojo.UserInfoExample">
+    delete from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="spring.boot.pojo.UserInfo">
+    insert into user_info (UID, XM, ZH, 
+      YHM, MM, YZ, ZT
+      )
+    values (#{uid,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, #{zh,jdbcType=VARCHAR}, 
+      #{yhm,jdbcType=VARCHAR}, #{mm,jdbcType=VARCHAR}, #{yz,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="spring.boot.pojo.UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        UID,
+      </if>
+      <if test="xm != null">
+        XM,
+      </if>
+      <if test="zh != null">
+        ZH,
+      </if>
+      <if test="yhm != null">
+        YHM,
+      </if>
+      <if test="mm != null">
+        MM,
+      </if>
+      <if test="yz != null">
+        YZ,
+      </if>
+      <if test="zt != null">
+        ZT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null">
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="zh != null">
+        #{zh,jdbcType=VARCHAR},
+      </if>
+      <if test="yhm != null">
+        #{yhm,jdbcType=VARCHAR},
+      </if>
+      <if test="mm != null">
+        #{mm,jdbcType=VARCHAR},
+      </if>
+      <if test="yz != null">
+        #{yz,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null">
+        #{zt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="spring.boot.pojo.UserInfoExample" resultType="java.lang.Long">
+    select count(*) from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_info
+    <set>
+      <if test="record.uid != null">
+        UID = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xm != null">
+        XM = #{record.xm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zh != null">
+        ZH = #{record.zh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yhm != null">
+        YHM = #{record.yhm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mm != null">
+        MM = #{record.mm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yz != null">
+        YZ = #{record.yz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zt != null">
+        ZT = #{record.zt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_info
+    set UID = #{record.uid,jdbcType=VARCHAR},
+      XM = #{record.xm,jdbcType=VARCHAR},
+      ZH = #{record.zh,jdbcType=VARCHAR},
+      YHM = #{record.yhm,jdbcType=VARCHAR},
+      MM = #{record.mm,jdbcType=VARCHAR},
+      YZ = #{record.yz,jdbcType=VARCHAR},
+      ZT = #{record.zt,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
